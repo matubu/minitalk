@@ -11,15 +11,20 @@ void	exit_msg(int fd, char *str, int len, int status)
 int	ft_atoi(const char *nptr)
 {
 	int	v;
+	int	neg;
 
 	v = 0;
+	if (*nptr == '-' && nptr++)
+		neg = 1;
 	while (*nptr)
 		if (*nptr >= '0' && *nptr <= '9')
-			v = v * 10 + *nptr++ - '0';
+			v = v * 10 - *nptr++ + '0';
 		else
 			exit_msg(2, "error: invalid pid\n", 19, 1);
 	if (!v)
 		exit_msg(2, "error: invalid pid\n", 19, 1);
+	if (!neg)
+		return (-v);
 	return (v);
 }
 
